@@ -1,4 +1,4 @@
-var obj = {};
+
 function signin(){
     // document.getElementById('form').value;
     var fail = false; 
@@ -10,8 +10,6 @@ function signin(){
         fail = "Вы не ввели своё имя";
     }else if(email == "" || email == " "){
         fail = "Вы не ввeли email";
-    }else if(email.split('@').length - 1 == 0){
-        fail = "Вы ввели email неправильно";
     }else if(password == "" || password == " "){
         fail = "Вы не ввели пароль";
     }else if(repassword == "" || repassword == " "){
@@ -26,8 +24,6 @@ function signin(){
         sign.style.display = 'none';
         var auth = document.getElementById('form1');
         auth.style.display = 'block';
-        obj.name = email;
-        obj.pass = password;
     }
 }
 
@@ -39,17 +35,45 @@ function login(){
     var password = form1.password1.value;
     if(name == "" || name == " "){
         fail = "Вы не ввели своё имя";
-    }else if(name.split('@').length - 1 == 0){
-        fail = "Вы ввели имя неправильно";
     }else if(password == "" || password == " "){
         fail = "Вы не ввели пароль";
-    }if(name != obj.name){
+    }if(name){
         fail = "Пользователь не найден";
-    }if(password != obj.pass){
+    }if(password){
         fail = "Неправильный пароль";
     }if(fail){
         alert(fail);
     }else{
-        window.location.href = "users.html";
+        postq();
     }
+}
+
+function postq(){
+
+    var input = document.getElementById('email').value;
+    fetch('https://cors-anywhere.herokuapp.com/http://nurs.ml/api/tables/',{
+
+        method: 'post',
+        headers: {"Content-Type":"application/json"},
+
+        body: JSON.stringify({
+            name_of_tables: input
+        })
+    }).then(res => res.json());
+}
+function getEmail(){
+    var input = document.getElementById('name1').value;
+    fetch('https://cors-anywhere.herokuapp.com/http://nurs.ml/api/tables/').
+    then(data=>data.json()).
+    then(data=>data).
+    then(function(data){
+        for(i = 0;i < data.length; i++){
+            console.log(data[i].name_of_tables);
+            if(input === data[i].name_of_tables){
+                window.open('http://github.com/' + input);
+            }else{
+                console.log(false)
+            }
+        }
+    })
 }

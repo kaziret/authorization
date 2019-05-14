@@ -17,13 +17,13 @@
         <input type="email" name="email" placeholder="Email" id="email" required>
         <input type="password" name="password" placeholder="Пароль" id="password" />
         <input type="password" name="repassword" placeholder="Проверка пароля" id="repassword" />
-        <button type="button" onclick="signin()">Создать</button>
+        <button type="button" onclick="signin(), postq()">Создать</button>
         <p class="message">Уже зарегистрированы? <a href="#">Войти</a></p>
       </form>
       <form class="login-form" id="form1">
         <input type="text" name="name1" placeholder="Имя" id="name1">
         <input type="password" name="password1" placeholder="Пароль" id="password1">
-        <button type="button" onclick="login()">Войти</button>
+        <button type="button" onclick="getEmail()">Войти</button>
         <p class="message">Не зарегистрированы? <a href="#"> Регистрация</a></p>
       </form>
     </div>
